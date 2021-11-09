@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 read -p "Enter first number : " a
 read -p "Enter second number : " b
@@ -6,22 +6,23 @@ read -p "Enter three number : " c
 
 x=$(( $a+$b*$c ))
 y=$(( $a*$b+$c ))
-z=`echo "scale=2; $c + $a / $b" | bc`
+z=$(( $c+$a/$b ))
 w=$(( $a%$b+$c ))
 
 declare -A arithmeticDict
 
-arithmeticDict[1]=$x
-arithmeticDict[2]=$y
-arithmeticDict[3]=$z
-arithmeticDict[4]=$w
+arithmeticDict[0]=$x
+arithmeticDict[1]=$y
+arithmeticDict[2]=$z
+arithmeticDict[3]=$w
 
-echo "The dictionary is : "${arithmeticDict[@]}
+echo "Dictionary is : "${arithmeticDict[1]}
 
-declare -a arithmeticArr
-
-for (( i=1;i<=4;i++ ))
+for (( i=0; i<=3; i++ ))
 do
-        arithmeticArr[$i]=${arithmeticDict[i]}
-        echo $i" > "${arithmeticDict[i]}
+        arr[$i]=${arithmeticDict[$i]}
 done
+
+echo "The array is : "${arr[@]}
+
+
